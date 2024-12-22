@@ -108,7 +108,7 @@ function Main() {
             <img src={close} alt="close button"/>
           </div>
           <div className={styles.title}><img src={posts} alt=""/>{openNews.title}</div>
-          <div className={styles.img}><img src={'https://s3-alpha-sig.figma.com/img/d5c3/db1f/cf15ddbb9a1d40a703cdf9e67ae58fbb?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TjDIEKA0s1yNb8rg2KFs6uVSd0m5vGWT-la911loWSdpH1~rEG4vEf9M8M8yx1FpOVXhcS2~fEye4FNT4qi6CSm0~fwa7zAvh2J-EcxVYlKscBAZYKOZALFXw5p4eMURDIpYuRadcXJan~HFRGEQkDJrcMwOKLikDlVrLCdEVKiPasUtzzVpm4wNULiMiSBtf53yMM9qfv4xWpIXtbFDkvJgkvhMp7AI0KHa2gVuu8zkAM3msMNoszTRdy3MHj3gY6t-5tj0NdTFxQ24x9dsUxgN0NY~bAsOOTv6Sax~uvg2M567HR~Cbcg0kDoQqK6QIqdf2nVxqLyDkUACW97b6w__'} alt="new image"/></div>
+          <div className={styles.img}><img src={openNews.img} alt="new image"/></div>
           <div
             className={styles.desc}
             dangerouslySetInnerHTML={{ __html: openNews.desc }}
