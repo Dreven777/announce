@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import './../../styles/vars.scss';
+
+body {
+    font-family: Ubuntu, sans-serif;
+}
+.main {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    background: #0D0D0D;
+    min-height: 800px;
+    @include _mobile {
+        overflow-y: scroll;
+    }
+    .modal {
+        position: absolute;
+        width: 76%;
+        max-height: 76%;
+        top: 12%;
+        left: 12%;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 24px;
+        background: var(--Tertiary, #171717);
+        z-index: 9;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: Ubuntu;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 16px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            color: #F2F2F7;
+        }
+        .desc {
+            margin-top: 24px;
+            //styleName: Body/Primary Regular;
+            font-family: Ubuntu;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            color: var(--White-Secondary, #A0A0A0);
+        }
+        .img {
+            margin-top: 24px;
+            img {
+                border-radius: 20px;
+                max-width: 80%;
+                margin-left: 10%;
+            }
+        }
+        .close_button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 24px ;
+            border: 1px solid var(--Green-Primary, #009951);
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            &:hover {
+                box-shadow: 0px 0px 20px 0px rgba(0, 153, 81, 0.60);
+            }
+        }
+        .date {
+            bottom: 20px;
+            right: 20px;
+            color: #707070;
+            //styleName: Body/Tertiary Regular;
+            font-family: Ubuntu;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 13px;
+            text-align: right;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+
+        }
+    }
+    .stars_img {
+        img {
+            width: 110%;
+            height: 110%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            will-change: transform; 
+        }
+    }
+    .bottom_social {
+        position: relative;
+        width: 40%;
+        left: 30%;
+        top: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        .list {
+            display: flex;
+            width: 324px;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            a {
+                img {
+                    width: 36px;
+                    height: 36px;
+                }
+                &:hover {
+                    scale: 1.1;
+                }
+            }
+        }
+        .text {
+            max-width: 500px;
+            min-width: 320px;
+            //styleName: Body/Tretiary Regular;
+            font-family: Ubuntu;
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 10px;
+            text-align: center;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            color: #303030;
+        }
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    .button {
+        @include _mobile {
+            margin-left: calc(50% - 120px);
+        }
+        width: 240px;
+        margin-top: 24px;
+        background: #23232333;
+        height: 48px;
+        border: 1px solid var(--Green-Primary, #009951);
+        border-radius: 24px;
+        cursor: pointer;
+        &:hover {
+            box-shadow: 0px 0px 20px 0px rgba(0, 153, 81, 0.60);
+            background: var(--Green-Primary, #009951);
+        }
+
+        //styleName: Body/Primary Medium;
+        font-family: Ubuntu;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: #F2F2F7;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .content {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        width: 80%;
+        left: 10%;
+        gap: 200px;
+        height: 80vh;
+        min-height: 700px;
+        top: 20%;
+        @include _mobile {
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 50px;
+            height: 1000px;
+            top: 10%;
+            left: 10%;
+        }
+        .left {
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            @include _mobile {
+                order: 2;
+                width: 90%;
+            }
+            min-width: 350px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: linear-gradient(0deg, rgba(13, 13, 13, 0.5) 0%, rgba(23, 23, 23, 0.5) 50%, rgba(13, 13, 13, 0.5) 100%);
+            max-height: 400px;
+            overflow-y: scroll;
+
+            .part {
+                padding: 8px;
+                box-sizing: border-box;
+                cursor: pointer;
+                height: 100px;
+                min-height: 100px;
+                &:hover {
+                    background: #30303080;
+                }
+                .title {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-family: Ubuntu;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 16px;
+                    text-align: left;
+                    text-underline-position: from-font;
+                    text-decoration-skip-ink: none;
+                    color: #F2F2F7;
+                }
+                .desc {
+                    margin-top: 4px;
+                    //styleName: Body/Primary Regular;
+                    font-family: Ubuntu;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 16px;
+                    text-align: left;
+                    text-underline-position: from-font;
+                    text-decoration-skip-ink: none;
+                    color: #A0A0A0;
+                }
+                .date {
+                    //styleName: Body/Tretiary Regular;
+                    font-family: Ubuntu;
+                    font-size: 10px;
+                    font-weight: 400;
+                    line-height: 10px;
+                    text-align: right;
+                    text-underline-position: from-font;
+                    text-decoration-skip-ink: none;
+                    color: #707070;
+
+                }
+            }
+        }
+        .right {
+            min-width: 350px;
+            width: 50%;
+            @include _mobile {
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            img {
+                @include _mobile {
+                    width: 60%;
+                    margin-left: 20%;
+                    min-width: 200px;
+                }
+            }
+            svg {
+                width: 90%;
+            }
+            h1 {
+                @include _mobile {
+                    text-align: center;
+                }
+                margin-top: 14px;
+                min-width: 350px;
+                font-weight: 400;
+                line-height: 36px;
+                text-align: left;
+                text-underline-position: from-font;
+                text-decoration-skip-ink: none;
+                color: #A0A0A0;
+                font-size: 28px;
+                @include _1920 {
+                    font-size: 36px;
+                }
+                @include _1440 {
+                    font-size: 32px;
+                }
+                @include _1320 {
+                    font-size: 30px;
+                }
+                @include _1180 {
+                    font-size: 28px;
+                }
+            }
+            .timer {
+                margin-top: 36px;
+                display: flex;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+                max-width: 436px;
+                @include _mobile {
+                    justify-content: center;
+                    gap: 24px;
+                    min-width: 100%;
+                }
+                .part {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    .count {
+                        @include _mobile {
+                            font-size: 48px;
+                        }
+                        font-size: 64px;
+                        font-weight: 700;
+                        line-height: 64px;
+                        text-align: center;
+                        text-underline-position: from-font;
+                        text-decoration-skip-ink: none;
+                        color: #F2F2F7;
+                    }
+                    .horizontal_line {
+                        width: 65px;
+                        border: 2px solid var(--Green-Primary, #009951);
+                        box-shadow: 0px 0px 10px 0px #009951;
+                        border-radius: 2px;
+                    }
+                    .text {
+                        font-size: 16px;
+                        font-weight: 300;
+                        line-height: 16px;
+                        text-underline-position: from-font;
+                        text-decoration-skip-ink: none;
+                        color: #A0A0A0;
+                        text-align: center;
+                    }  
+                }
+            }
+        }
+    }
+}

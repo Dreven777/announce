@@ -1,0 +1,19 @@
+@import './vars.scss';
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+body {
+    margin: 0 0;
+    overflow: hidden;
+    user-select: none; 
+    font-family: Ubuntu;
+    
+}
+h1, h2, h3{
+    margin: 0 0;
+    padding: 0 0;
+}
