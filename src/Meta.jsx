@@ -18,7 +18,7 @@ const MyMetaTags = () => (
     <meta property="og:description" content="Головна сторінка проекту Mansory Roleplay." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mansory-rp.com" />
-    <meta property="og:image" content="https://mansory-rp.com/preview.jpg" />
+    <meta property="og:image" content="https://mansory-rp.com/favicon.ico" />
     <meta property="og:locale" content="uk_UA" />
 
   </Helmet>

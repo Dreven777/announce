@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import DOMPurify from "dompurify";
+
 import styles from './style.module.scss';
 import stars_bg from './../../images/stars.png';
 import logo from './../../images/logo.svg';
@@ -19,7 +21,7 @@ interface Message {
 }
 
 function Main() {
-  const targetDate = new Date('2025-02-01T00:00:00');
+  const targetDate = new Date('2025-03-01T00:00:00');
 
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -89,6 +91,15 @@ function Main() {
     };
   }, []);
 
+  const truncateAndSanitize = (html : any, maxLength : number) => {
+    const plainText = DOMPurify.sanitize(html, { ALLOWED_TAGS: [] });
+    const truncated = plainText.length > maxLength
+      ? `${plainText.slice(0, maxLength)}...`
+      : plainText;
+    
+    return DOMPurify.sanitize(truncated);
+  };
+
   return (
     <div className={styles.main}>
       {openNews ? <>
@@ -98,7 +109,10 @@ function Main() {
           </div>
           <div className={styles.title}><img src={posts} alt=""/>{openNews.title}</div>
           <div className={styles.img}><img src={'https://s3-alpha-sig.figma.com/img/d5c3/db1f/cf15ddbb9a1d40a703cdf9e67ae58fbb?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TjDIEKA0s1yNb8rg2KFs6uVSd0m5vGWT-la911loWSdpH1~rEG4vEf9M8M8yx1FpOVXhcS2~fEye4FNT4qi6CSm0~fwa7zAvh2J-EcxVYlKscBAZYKOZALFXw5p4eMURDIpYuRadcXJan~HFRGEQkDJrcMwOKLikDlVrLCdEVKiPasUtzzVpm4wNULiMiSBtf53yMM9qfv4xWpIXtbFDkvJgkvhMp7AI0KHa2gVuu8zkAM3msMNoszTRdy3MHj3gY6t-5tj0NdTFxQ24x9dsUxgN0NY~bAsOOTv6Sax~uvg2M567HR~Cbcg0kDoQqK6QIqdf2nVxqLyDkUACW97b6w__'} alt="new image"/></div>
-          <div className={styles.desc}>{openNews.desc}</div>
+          <div
+            className={styles.desc}
+            dangerouslySetInnerHTML={{ __html: openNews.desc }}
+          ></div>
           <div className={styles.date}>{openNews.date}</div>
         </div>
       </>: null}
@@ -118,7 +132,12 @@ function Main() {
                   <img src={posts} alt="" />
                   {item.title}
                 </div>
-                <div className={styles.desc}>{item.desc}</div>
+                <div
+                    className={styles.desc}
+                    dangerouslySetInnerHTML={{
+                      __html: truncateAndSanitize(item.desc, 256),
+                    }}
+                  ></div>
                 <div className={styles.date}>{item.date}</div>
               </div>
             ))

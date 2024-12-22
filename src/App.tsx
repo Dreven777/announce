@@ -7,8 +7,8 @@ import MyMetaTags from './Meta';
 function App() {
   return (
     <div>
-      <Main/>
       <MyMetaTags/>
+      <Main/>
     </div>
   );
 }
