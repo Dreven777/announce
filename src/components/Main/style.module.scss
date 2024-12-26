@@ -300,9 +300,10 @@ body {
                 @include _mobile {
                     text-align: center;
                     margin-left: calc(50% - 200px);
+                    width: 400px;
                 }
                 margin-top: 14px;
-                width: 400px;
+                width: 450px;
                 height: 100px;
                 font-weight: 400;
                 line-height: 36px;
