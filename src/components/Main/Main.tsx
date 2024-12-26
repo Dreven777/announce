@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DOMPurify from "dompurify";
+import { Typewriter } from "react-simple-typewriter";
 
 import styles from './style.module.scss';
 import stars_bg from './../../images/stars.png';
@@ -18,6 +19,7 @@ interface Message {
   desc: string;
   date: string;
   img?: string;
+  link?: string;
 }
 
 function Main() {
@@ -35,18 +37,33 @@ function Main() {
 
   useEffect(() => {
 
-    async function fetchMessages() {
+    async function fetchMessages(): Promise<void> {
       try {
-        const response = await fetch('./data.json'); 
+        const response = await fetch('./data.json');
         if (!response.ok) {
           throw new Error('Failed to fetch data.json');
         }
-        const data = await response.json();
-        setMessages(data);
+        const data: Message[] = await response.json();
+        
+        // Сортуємо масив повідомлень за датою (новіші повідомлення на початку)
+        const sortedData = data.sort((a, b) => {
+          const [dayA, monthA, yearA] = a.date.split('.');
+          const [dayB, monthB, yearB] = b.date.split('.');
+          
+          // Створюємо об'єкти Date
+          const dateA = new Date(Number(yearA), Number(monthA) - 1, Number(dayA));  // Місяць у JavaScript починається з 0
+          const dateB = new Date(Number(yearB), Number(monthB) - 1, Number(dayB));
+    
+          // Сортуємо від найновіших до найстаріших
+          return dateB.getTime() - dateA.getTime();
+        });
+        
+        setMessages(sortedData);
       } catch (error) {
         console.error('Error loading data.json:', error);
       }
     }
+    
 
     fetchMessages();
 
@@ -56,8 +73,8 @@ function Main() {
       const { clientX: mouseX, clientY: mouseY } = e;
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      const offsetX = (mouseX - centerX) * 0.02;
-      const offsetY = (mouseY - centerY) * 0.02;
+      const offsetX = (mouseX - centerX) * 0.01;
+      const offsetY = (mouseY - centerY) * 0.01;
 
       image.style.transform = `translate(-50%, -50%) translate(${offsetX}px, ${offsetY}px)`;
     };
@@ -100,6 +117,20 @@ function Main() {
     return DOMPurify.sanitize(truncated);
   };
 
+  const words = ["Час змінювати правила. Ласкаво просимо в Mansory."];
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if(event.key === 'Escape'){
+          setOpenNews(null)
+        }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []); 
+
   return (
     <div className={styles.main}>
       {openNews ? <>
@@ -108,11 +139,14 @@ function Main() {
             <img src={close} alt="close button"/>
           </div>
           <div className={styles.title}><img src={posts} alt=""/>{openNews.title}</div>
-          <div className={styles.img}><img src={openNews.img} alt="new image"/></div>
+          {openNews.img ? <div className={styles.img}><img src={openNews.img} alt="new image"/></div>:null}
           <div
             className={styles.desc}
             dangerouslySetInnerHTML={{ __html: openNews.desc }}
           ></div>
+          {openNews.link ? <div className={styles.button} onClick={()=> window.open(`${openNews.link}`, "_blank")}>
+              Дізнатися більше
+            </div>:null}
           <div className={styles.date}>{openNews.date}</div>
         </div>
       </>: null}
@@ -149,10 +183,16 @@ function Main() {
 
         <div className={styles.right}>
           <img src={logo} alt="logo" />
-          <h1>
-            Час змінювати правила.<br />
-            Ласкаво просимо в Mansory.
-          </h1>
+            <h1>
+              <Typewriter
+                words={words}
+                loop={false}
+                cursor
+                typeSpeed={70}
+                deleteSpeed={0}
+                delaySpeed={9999999}
+              />
+            </h1>
           <div className={styles.timer}>
             <div className={styles.part}>
               <div className={styles.count}>{timeLeft.day}</div>

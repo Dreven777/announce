@@ -3,18 +3,24 @@
 
 body {
     font-family: Ubuntu, sans-serif;
+    background: #0D0D0D;
+    overflow-y: auto;
+    @media (min-height: 820px) {
+        overflow-y: hidden;
+    }
+    @include _mobile {
+        overflow-y: auto;
+    }
+    height: 100vh;
 }
 .main {
-    position: relative;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
     height: 100vh;
-    background: #0D0D0D;
-    @include _mobile {
-        overflow-y: scroll;
-    }
     .modal {
+        user-select: text;
+        color: #F2F2F7;
         position: absolute;
         width: 76%;
         max-height: 76%;
@@ -38,6 +44,7 @@ body {
             font-weight: 500;
             line-height: 16px;
             text-align: left;
+            width: 90%;
             text-underline-position: from-font;
             text-decoration-skip-ink: none;
             color: #F2F2F7;
@@ -52,7 +59,7 @@ body {
             text-align: left;
             text-underline-position: from-font;
             text-decoration-skip-ink: none;
-            color: var(--White-Secondary, #A0A0A0);
+            color: #F2F2F7;
         }
         .img {
             margin-top: 24px;
@@ -95,6 +102,7 @@ body {
         }
     }
     .stars_img {
+        overflow: hidden;
         img {
             width: 110%;
             height: 110%;
@@ -106,14 +114,21 @@ body {
         }
     }
     .bottom_social {
-        position: relative;
+        position: absolute;
         width: 40%;
         left: 30%;
-        top: 10%;
+        bottom: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        @media (max-height: 900px) {
+            position: relative;
+        }
+        @include _mobile {
+            position: relative;
+            margin-top: 10%;
+        }
         .list {
             display: flex;
             width: 324px;
@@ -184,20 +199,18 @@ body {
     .content {
         position: relative;
         display: flex;
+        flex: 9;
         flex-wrap: nowrap;
         width: 80%;
         left: 10%;
         gap: 200px;
-        height: 80vh;
-        min-height: 700px;
-        top: 20%;
+        margin-top: 10%;
         @include _mobile {
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             flex-direction: row;
             gap: 50px;
-            height: 1000px;
             top: 10%;
             left: 10%;
         }
@@ -219,10 +232,9 @@ body {
             overflow-y: scroll;
 
             .part {
-                padding: 8px;
+                padding: 8px 8px 4px 8px;
                 box-sizing: border-box;
                 cursor: pointer;
-                min-height: 100px;
                 &:hover {
                     background: #30303080;
                 }
@@ -240,7 +252,7 @@ body {
                     color: #F2F2F7;
                 }
                 .desc {
-                    margin-top: 4px;
+                    margin-top: 8px;
                     //styleName: Body/Primary Regular;
                     font-family: Ubuntu;
                     font-size: 14px;
@@ -287,9 +299,11 @@ body {
             h1 {
                 @include _mobile {
                     text-align: center;
+                    margin-left: calc(50% - 200px);
                 }
                 margin-top: 14px;
-                min-width: 350px;
+                width: 400px;
+                height: 100px;
                 font-weight: 400;
                 line-height: 36px;
                 text-align: left;
